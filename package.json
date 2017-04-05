@@ -1,0 +1,40 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "App Boilerplate",
+  "main": "index.js",
+  "engines": {
+    "node": "7"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node app.js",
+    "heroku-postbuild": "next build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acorcutt/boilerplate.git"
+  },
+  "keywords": [
+    "boilerplate",
+    "react",
+    "next",
+    "apollo",
+    "express",
+    "expo"
+  ],
+  "author": "Anthony Corcutt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acorcutt/boilerplate/issues"
+  },
+  "homepage": "https://github.com/acorcutt/boilerplate#readme",
+  "dependencies": {
+    "babel-plugin-transform-define": "^1.2.0",
+    "express": "^4.15.2",
+    "next": "^2.0.1",
+    "pm2": "^2.4.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
