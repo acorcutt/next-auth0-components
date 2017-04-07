@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default ({children})=>(<div>
+export default ({children, className})=>(<div className={className}>
   <Head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

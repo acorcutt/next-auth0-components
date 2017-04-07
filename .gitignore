@@ -36,8 +36,8 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-# Next.js
-.next
+# We want to keep the build folder incase we need custom build files but we dont need the next.js build
+build/next
 
 # Env
 .env
