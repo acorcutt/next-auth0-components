@@ -1,0 +1,1 @@
+# we want .next/dist in npm package so dont use .gitignore
