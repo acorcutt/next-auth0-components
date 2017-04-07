@@ -7,7 +7,7 @@
     "node": "7"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "dev": "node app.js",
     "heroku-postbuild": "next build"
   },
