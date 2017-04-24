@@ -15,6 +15,8 @@ class Lock extends React.Component {
   }
 
   static propTypes = {
+    auth0Id: PropTypes.string.isRequired,
+    auth0Domain: PropTypes.string.isRequired,
     login: PropTypes.string,
     redirect: PropTypes.string,
     options: PropTypes.object,
@@ -28,9 +30,9 @@ class Lock extends React.Component {
   componentDidMount () {
     // Cross-browser window.origin
     let origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
-    
+
     // Configure Auth0 instance
-    this.lock = this.lock || new Auth0Lock(this.props.authId, this.props.authDomain, {
+    this.lock = this.lock || new Auth0Lock(this.props.auth0Id, this.props.auth0Domain, {
       auth: {
         redirectUrl: origin + this.props.login,
         responseType: 'token'
@@ -116,7 +118,7 @@ class Lock extends React.Component {
 
   render () {
     // Extract props we don't want to passthrough
-    const { ready, login, redirect, authId, authDomain, ...passThroughProps } = this.props;
+    const { ready, login, redirect, auth0Id, auth0Domain, ...passThroughProps } = this.props;
     const { children } = this.props;
     
     if (typeof children === 'function') { // Custom children
@@ -132,9 +134,7 @@ class Lock extends React.Component {
 
 Lock.defaultProps = {
   login: '/login',
-  redirect: '/',
-  authId: process.env.AUTH0_ID,
-  authDomain: process.env.AUTH0_DOMAIN
+  redirect: '/'
 };
 
 export default Lock;

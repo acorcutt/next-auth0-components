@@ -6,7 +6,7 @@ export default ({children, className})=>(<div className={className}>
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
     <title>Boilerplate</title>
-    <meta name="description" content="Boilerplate" />
+    <meta name="description" content="Next Auth0 Components" />
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.7.0/tachyons.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i" />
