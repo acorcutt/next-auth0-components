@@ -1,6 +1,6 @@
 {
   "name": "next-auth0-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Components for quickly adding Auth0 support to a Next.js app.",
   "main": "index.js",
   "engines": {
@@ -28,7 +28,14 @@
   },
   "homepage": "https://github.com/acorcutt/next-auth0-components#readme",
   "dependencies": {
-    "auth0-lock": "^10.14.0",
+    "auth0-lock": "^10.14.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.5.8",
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3"
+  },
+  "devDependencies": {
     "babel-plugin-transform-define": "^1.2.0",
     "express": "^4.15.2",
     "next": "^2.1.1",
@@ -36,6 +43,5 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
-  },
-  "devDependencies": {}
+  }
 }
