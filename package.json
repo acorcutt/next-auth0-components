@@ -28,10 +28,12 @@
   },
   "homepage": "https://github.com/acorcutt/next-auth0-components#readme",
   "dependencies": {
+    "auth0-lock": "^10.14.0",
     "babel-plugin-transform-define": "^1.2.0",
     "express": "^4.15.2",
     "next": "^2.1.1",
     "pm2": "^2.4.4",
+    "prop-types": "^15.5.8",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
   },
