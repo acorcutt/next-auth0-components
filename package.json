@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
-  "description": "App Boilerplate",
+  "name": "next-auth0-components",
+  "version": "0.0.1",
+  "description": "Components for quickly adding Auth0 support to a Next.js app.",
   "main": "index.js",
   "engines": {
     "node": "7"
@@ -13,20 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/acorcutt/boilerplate.git"
+    "url": "git+https://github.com/acorcutt/next-auth0-components.git"
   },
   "keywords": [
-    "boilerplate",
+    "auth0",
     "react",
     "next",
-    "express"
+    "component"
   ],
   "author": "Anthony Corcutt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/acorcutt/boilerplate/issues"
+    "url": "https://github.com/acorcutt/next-auth0-components/issues"
   },
-  "homepage": "https://github.com/acorcutt/boilerplate#readme",
+  "homepage": "https://github.com/acorcutt/next-auth0-components#readme",
   "dependencies": {
     "babel-plugin-transform-define": "^1.2.0",
     "express": "^4.15.2",
@@ -34,5 +34,6 @@
     "pm2": "^2.4.4",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,14 +1,8 @@
-# Next Boilerplate
+# Next Auth0 Components
 
-Boilerplate for rapidly prototyping apps and components with next.js, react, express, pm2, tachyons.
+** Work in Progress **
 
-## Quickstart
-
-`git clone git@github.com:acorcutt/boilerplate.git`
-
-`git remote rename origin upstream` or `git remote rm origin`
-
-`git remote add origin your-repos-url`
+Components for quickly adding Auth0 support to a Next.js app.
 
 ## App Boilerplate
 
