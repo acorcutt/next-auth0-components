@@ -6,13 +6,23 @@ import defaultsDeep from 'lodash/defaultsDeep';
 
 import Lock from './Lock';
 
+const defaultOptions = {  
+  languageDictionary: {
+    title: 'Auth 0'
+  },    
+  theme: {
+    primaryColor: '#FF6300',
+    logo: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'
+  }
+};
+
 function Layout({children}){
   return <div>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
   
-      <title>Login</title>
+      <title>{defaultOptions.languageDictionary.title}</title>
 
       {/* //global jsx does not work inside the Head with initialState check? Just use standard style tag */}
       <style dangerouslySetInnerHTML={{__html: `html{background:#111118;} body{margin:0;padding:0;} body, input, select, option, textarea {font-family: sans-serif;}` }} />
@@ -26,17 +36,6 @@ function Layout({children}){
 
 
 function Form(props){
-
-
-  const defaultOptions = {  
-    languageDictionary: {
-      title: 'Site Name'
-    },    
-    theme: {
-      primaryColor: '#FF6300',
-      logo: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'
-    }
-  };
 
   const options = defaultsDeep( props.options, defaultOptions );
 
@@ -224,15 +223,7 @@ class Login extends React.Component {
 
   render () {
     const { auth0Id, auth0Domain, options } = this.props;
-    const defaultOptions = {  
-      languageDictionary: {
-        title: 'Site Name'
-      },    
-      theme: {
-        primaryColor: '#FF6300',
-        logo: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'
-      }
-    };
+
     return <Lock error={this.onError} authenticated={this.onAuthenticated} options={{...defaultsDeep(options, defaultOptions ), closable: false, autoclose: false }} ready={this.lockReady} children={(props)=>(<Layout>{this.layout(props)}</Layout>)} auth0Id={auth0Id} auth0Domain={auth0Domain} />;
     
   }
