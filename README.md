@@ -1,8 +1,13 @@
 # Next Auth0 Components
 
-** Work in Progress **
+__Work in Progress__
 
 Components for quickly adding Auth0 support to a Next.js app.
+
+## TODO
+- Account creation callback
+- Pass auth response to verify callback
+- Multiple account connecting
 
 ## App Boilerplate
 

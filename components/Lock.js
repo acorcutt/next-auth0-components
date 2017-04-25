@@ -21,6 +21,8 @@ class Lock extends React.Component {
     redirect: PropTypes.string,
     options: PropTypes.object,
     ready: PropTypes.func,
+    authenticated: PropTypes.func,
+    error: PropTypes.func,
     children: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.func
@@ -38,103 +40,55 @@ class Lock extends React.Component {
         responseType: 'token'
       },
       theme: {
-        primaryColor: '#5E2CA5'
+        primaryColor: '#FF6300'
       },
       ...this.props.options
     });
     
-    this.lock.on('authenticated', this.onAuthenticated);
-    this.lock.on('unrecoverable_error', this.onError);
+    this.props.authenticated && this.lock.on('authenticated', this.props.authenticated);
+    this.props.error && this.lock.on('unrecoverable_error', this.props.error);
     
     Router.onRouteChangeStart = () => {
       this.lock && this.lock.hide();
     };
 
-    this.props.ready && this.props.ready(this);
+    this.props.ready && this.props.ready(this.lock);
   }
 
   componentWillUnmount () {
     this.lock && this.lock.hide();
   }
 
-  onAuthenticated = (authResult) =>{
-    //console.log('authenticated',authResult);
-    try{
-      window.localStorage.setItem('auth0IdToken', authResult.idToken);
-    }
-    catch(e){
-      this.lock && this.lock.show({
-        flashMessage: {
-          type: 'error',
-          text: 'You must allow your browser to use local storage to login.'
-        }
-      });      
-    }
-    
-    // Redirect to verify or create user
-    Router.replace(this.props.login + '?verify');
-  }
-
-  onError = (error) =>{
-    //console.log('auth error', error);
-    
-    //window.localStorage.removeItem('auth0IdToken');
-    //window.localStorage.removeItem('auth0Redirect');
-    
-    this.lock && this.lock.show({
-      flashMessage: {
-        type: 'error',
-        text: 'There was an error, please try again.'
-      }
-    });
-  }
-
-  show = () => {
-    const { redirect } = this.props;
-    
-    try{
-      window.localStorage.setItem('auth0Redirect', redirect);
-      this.lock && this.lock.show();
-    }
-    catch(e){
-      this.lock && this.lock.show({
-        flashMessage: {
-          type: 'error',
-          text: 'You must allow your browser to use local storage to login.'
-        }
-      });      
-    }
-    
-  }
-
-  hide = () => {
-    this.lock && this.lock.hide();    
-  }
-
   onClick = (e) =>{
     e.preventDefault();
-    this.show();
+    try{
+      window.localStorage.setItem('auth0Redirect', this.props.redirect);
+    }
+    catch(e){ // local storage is disabled just ignore
+    }
+    
+    this.lock && this.lock.show();
   }
 
   render () {
     // Extract props we don't want to passthrough
-    const { ready, login, redirect, auth0Id, auth0Domain, ...passThroughProps } = this.props;
+    const { ready, options, login, redirect, auth0Id, auth0Domain, ...passThroughProps } = this.props;
     const { children } = this.props;
     
     if (typeof children === 'function') { // Custom children
       return children({
-        show: this.show,
-        hide: this.hide
+        lock: this.lock // Note that this may not be available!
       });
     } else { // Create a link with fallback
-      return <a {...passThroughProps} href={login} onClick={this.onClick} />;
+      return <a {...passThroughProps} href={ login + '?redirect=' + redirect } onClick={this.onClick} />;
     }
   }
 }
 
 Lock.defaultProps = {
   login: '/login',
-  redirect: '/'
+  redirect: '/',
+  options: {}
 };
 
 export default Lock;
