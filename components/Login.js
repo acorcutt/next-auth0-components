@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import defaultsDeep from 'lodash/defaultsDeep';
 
@@ -63,7 +64,7 @@ function Form(props){
                     <p><span>Hello, it looks like you are new here...</span></p>
                     
                     <p className="auth0-lock-alternative">
-                      <a href="/login?action=check" className="auth0-lock-alternative-link">Already have a profile?</a>
+                      <a href="?verify" className="auth0-lock-alternative-link">Already have a profile?</a>
                     </p>
                   </div>
                 </div>
@@ -110,10 +111,9 @@ class Login extends React.Component {
     auth0Id: PropTypes.string.isRequired,
     auth0Domain: PropTypes.string.isRequired,
     login: PropTypes.string, // login path for auth0 to return to
-    url: PropTypes.object.isRequired, // url from page props
     options: PropTypes.object, // lock options
-    verify: PropTypes.func, // function to verify authenticated user
-    create: PropTypes.func, // function to create a new user
+    onAuthenticated: PropTypes.func, // function to verify authenticated user
+    //create: PropTypes.func, // function to create a new user
   }
   
   lockReady = (lock) => {
@@ -121,16 +121,13 @@ class Login extends React.Component {
   }
   
   componentDidUpdate(prevProps, prevState) {
-    
     // We should always get a componentDidUpdate as the lock will trigger a state change when its ready.
-    const { url } = this.props;
 
-    const action = url && url.query && url.query.action;
-
-    // If we are not doing verify or create and we have a new lock then open it for login
+    // If we are not doing create and we have a new lock then open it for login
     // Note that the return from auth0 with #hash will hit this also. Lock will authenticate and redirect to verify action
     if(!this.state.user && !window.location.hash && this.state.lock && !prevState.lock){
-      if(action === 'check'){
+      // TODO - we do a page load in the form to '?verify' - should we just trigger a state change to get here instead?
+      if(window.location.search === '?verify'){
         // Let the user check they used the correct account (they might have use social before etc.)
         this.state.lock.show({
           flashMessage: {
@@ -160,9 +157,9 @@ class Login extends React.Component {
           }
         });         
       } else {
-        // Can we do verify here whilst we still have data?
-        if(this.props.verify){
-          this.props.verify((user)=>{
+        
+        if(this.props.onAuthenticated){
+          this.props.onAuthenticated((user)=>{
             // If verify returns then set default user state for form
             this.setState({ user });
             //Router.replace(this.props.login + '?action=create');  
@@ -171,24 +168,6 @@ class Login extends React.Component {
           // Just redirect
           Router.replace('/');
         }
-        
-        // try{
-        //   window.localStorage.setItem("auth0AccessToken", authResult.accessToken);          
-        //   window.localStorage.setItem('auth0IdToken', authResult.idToken);
-        //   window.localStorage.setItem("auth0Profile", JSON.stringify(profile));
-          
-        //   // Redirect to verify or create user
-        //   Router.replace(this.props.login + '?action=verify');
-          
-        // }
-        // catch(e){
-        //   this.state.lock && this.state.lock.show({
-        //     flashMessage: {
-        //       type: 'error',
-        //       text: 'You must allow your browser to use local storage to login.'
-        //     }
-        //   });      
-        // }
       }
     });
   }
@@ -205,10 +184,8 @@ class Login extends React.Component {
   }
   
   layout = () => {
-    const { url, options } = this.props;
+    const { options } = this.props;
     const { lock, user } = this.state;
-    
-    const action = url && url.query && url.query.action;
     
     if( lock ){
       if( user ){

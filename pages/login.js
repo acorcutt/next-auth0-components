@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
   }
 
   // Do something with the authResult and return a redirect url
-  verify ( create, authResult, profile ){
+  onAuthenticated ( create, authResult, profile ){
     //console.log(authResult, profile);
     // If failed then call the create callback - else redirect
     create({
@@ -17,10 +17,29 @@ class LoginPage extends React.Component {
       email: profile.email,
       username: profile.nickname
     });
+    
+        // try{
+        //   window.localStorage.setItem("auth0AccessToken", authResult.accessToken);          
+        //   window.localStorage.setItem('auth0IdToken', authResult.idToken);
+        //   window.localStorage.setItem("auth0Profile", JSON.stringify(profile));
+          
+        //   // Redirect to verify or create user
+        //   Router.replace(this.props.login + '?action=verify');
+          
+        // }
+        // catch(e){
+        //   this.state.lock && this.state.lock.show({
+        //     flashMessage: {
+        //       type: 'error',
+        //       text: 'You must allow your browser to use local storage to login.'
+        //     }
+        //   });      
+        // }
+    
   }
   
   // Create a user in the db and return
-  create ( callback ) {
+  onCreate ( callback ) {
     let user = {
 
     }
@@ -41,7 +60,7 @@ class LoginPage extends React.Component {
       }
     };
 
-    return <Login options={options} verify={this.verify} create={this.create} url={url} auth0Id={process.env.AUTH0_ID} auth0Domain={process.env.AUTH0_DOMAIN} />;
+    return <Login options={options} onAuthenticated={this.onAuthenticated} onCreate={this.onCreate} auth0Id={process.env.AUTH0_ID} auth0Domain={process.env.AUTH0_DOMAIN} />;
   }
 }
 
