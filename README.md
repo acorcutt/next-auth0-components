@@ -31,7 +31,13 @@ TODO
 
 ### Using Lock Overlay
 
-TODO
+Use the `<Lock />` component on a page to generate an overlay login form...
+
+```
+import Lock from 'next-auth0-components';
+
+<Lock layout={({lock})=>(<button onClick={()=>{lock.show()}}>Overlay Login</button>)} auth0Id={process.env.AUTH0_ID} auth0Domain={process.env.AUTH0_DOMAIN}><a href="/login">Static Login Link</a></Lock>
+```
 
 ## App Boilerplate & Example
 

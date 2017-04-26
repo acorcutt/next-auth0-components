@@ -116,10 +116,6 @@ class Login extends React.Component {
     //create: PropTypes.func, // function to create a new user
   }
   
-  lockReady = (lock) => {
-    this.setState({lock: lock});
-  }
-  
   componentDidUpdate(prevProps, prevState) {
     // We should always get a componentDidUpdate as the lock will trigger a state change when its ready.
 
@@ -183,25 +179,28 @@ class Login extends React.Component {
     });
   }
   
-  layout = () => {
+  layout = ({ lock }) => {
+    const { user } = this.state;
     const { options } = this.props;
-    const { lock, user } = this.state;
     
-    if( lock ){
-      if( user ){
-        return <Form options={options} />;
-      } else {
-        return <Head><title>Login</title></Head>;
-      }
+    if( user ){
+      return <Layout><Form options={options} /></Layout>;
     } else {
-      return <Head><title>Initialising...</title></Head>;
+      return <Layout><Head><title>Login</title></Head></Layout>;
     }
+  }
+
+  onLock = (component) => {
+    this.setState({lock: component.lock});
   }
 
   render () {
     const { auth0Id, auth0Domain, options } = this.props;
 
-    return <Lock error={this.onError} authenticated={this.onAuthenticated} options={{...defaultsDeep(options, defaultOptions ), closable: false, autoclose: false }} ready={this.lockReady} children={(props)=>(<Layout>{this.layout(props)}</Layout>)} auth0Id={auth0Id} auth0Domain={auth0Domain} />;
+    //return <Lock ref={this.onLock} onError={this.onError} onAuthenticated={this.onAuthenticated} options={{...defaultsDeep(options, defaultOptions ), closable: false, autoclose: false }} children={(props)=>(<Layout>{this.layout(props)}</Layout>)} auth0Id={auth0Id} auth0Domain={auth0Domain} />;
+    return <Lock ref={this.onLock} onError={this.onError} onAuthenticated={this.onAuthenticated} options={{...defaultsDeep(options, defaultOptions ), closable: false, autoclose: false }} layout={this.layout} auth0Id={auth0Id} auth0Domain={auth0Domain}>
+      <Layout><Head><title>Initialising...</title></Head></Layout>
+    </Lock>;
     
   }
 }
