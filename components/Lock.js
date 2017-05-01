@@ -57,7 +57,7 @@ class Lock extends React.Component {
 
   render () {
     const { children, layout } = this.props;
-    console.log(layout, children)
+    
     // Render optional layout when ready - with lock if function
     return this.state.isMounted ? (layout ? (typeof layout === 'function' ? layout({lock: this.lock}) : layout) : children ) : children;
   }

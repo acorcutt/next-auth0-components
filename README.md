@@ -15,7 +15,7 @@ Components for quickly adding Auth0 support to a Next.js app.
 
 Setup a client in Auth0 and allow the `https://yourdomain.com/login` and `https://yourdomain.com/logout` callback Urls.
 
-Set `process.env.AUTH0_ID` and `` to your client 
+Set `process.env.AUTH0_ID` and `process.env.AUTH0_DOMAIN` to your client 
 
 ### Minimal Setup
 

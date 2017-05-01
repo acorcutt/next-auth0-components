@@ -4,5 +4,6 @@
 module.exports = {
   "process.env.NODE_ENV": process.env.NODE_ENV,
   "process.env.AUTH0_ID": process.env.AUTH0_ID,
-  "process.env.AUTH0_DOMAIN": process.env.AUTH0_DOMAIN
+  "process.env.AUTH0_DOMAIN": process.env.AUTH0_DOMAIN,
+  "process.env.GRAPHQL_URL": process.env.GRAPHQL_URL,
 };

@@ -1,6 +1,6 @@
 {
   "name": "next-auth0-components",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Components for quickly adding Auth0 support to a Next.js app.",
   "main": "index.js",
   "engines": {
@@ -43,6 +43,8 @@
     "pm2": "^2.4.4",
     "prop-types": "^15.5.8",
     "react": "^15.5.3",
-    "react-dom": "^15.5.3"
+    "react-dom": "^15.5.3",
+    "next-apollo-provider": "^0.0.7",
+    "react-apollo": "^1.1.1"
   }
 }
