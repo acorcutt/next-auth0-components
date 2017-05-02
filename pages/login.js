@@ -62,13 +62,15 @@ class LoginPage extends React.Component {
   }
   
   // Create a user in the db and return
-  onCreate = ( user, callback ) => {
+  onCreate = ( user, authResult, callback ) => {
+    console.log('onCreate', user, authResult);
+    
     this.props.createUserMutation({ variables: {
       username: user.username,
       name: user.name,
       email: user.email,
       picture: user.picture,
-      authProvider: { auth0: { idToken: window.localStorage.getItem('auth0IdToken')} }
+      authProvider: { auth0: { idToken: authResult.idToken} }
     }}).then((result) => {
       Router.replace(window.localStorage.getItem('auth0Redirect') || '/');      
     }).catch( (errors)=>{

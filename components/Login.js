@@ -28,6 +28,7 @@ class Login extends React.Component {
     this.state = {
       action: null, // action from url 
       user: null,  // create user data
+      authResult: null, // auth tokens etc.
       error: null // user create error
     };
   }
@@ -130,7 +131,7 @@ class Login extends React.Component {
               });                 
             } else {
               // If onAuthenticated returns a user then set default state for form and redirect to create
-              this.setState({ user }, ()=>{
+              this.setState({ user, authResult, profile }, ()=>{
                 Router.push({ pathname:Router.pathname, query: { action:'create' } });
               });
             }
@@ -163,7 +164,7 @@ class Login extends React.Component {
   
   onFormSubmit = (event) =>{
     event.preventDefault();
-    this.props.onCreate && this.props.onCreate( this.state.user, ( error )=>{
+    this.props.onCreate && this.props.onCreate( this.state.user, this.state.authResult, ( error )=>{
       if(error){
         this.setState({ error });  
       } else {
