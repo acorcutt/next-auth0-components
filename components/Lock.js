@@ -53,6 +53,7 @@ class Lock extends React.Component {
 
   componentWillUnmount () {
     this.lock && this.lock.hide();
+    this.setState({ isMounted: false });
   }
 
   render () {

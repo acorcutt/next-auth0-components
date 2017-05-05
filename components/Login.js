@@ -40,7 +40,7 @@ class Login extends React.Component {
     onAuthenticated: PropTypes.func, // function to verify authenticated user
     onCreate: PropTypes.func, // function to create a new user
   }
-  
+
   // We need to wait for a lock to be available before we do anything
   onLock = (component) => {
     
@@ -55,8 +55,8 @@ class Login extends React.Component {
     }
 
     // Listen for route changes
-    Router.onRouteChangeComplete = (url) => {
-      this.setState({ action: Router.query.action || 'login' });        
+    Router.onRouteChangeStart = (url) => { // onRouteChangeComplete
+      component && component.lock && this.setState({ action: Router.query.action || 'login' });        
     };
   }
 
@@ -176,7 +176,7 @@ class Login extends React.Component {
   layout = ({ lock }) => {
     const { action, user, error } = this.state;
     const { options } = this.props;
-    
+
     switch(action){
       case 'create':
         if(user){

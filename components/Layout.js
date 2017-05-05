@@ -13,6 +13,8 @@ function Layout({children}){
       <noscript><style type="text/css">{`.js{display:none!important;}`}</style></noscript>
   
       <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+      
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     </Head>  
     {children}
   </div>;

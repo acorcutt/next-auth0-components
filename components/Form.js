@@ -27,26 +27,26 @@ function Form({ user, options, onChange, onSubmit, error}){
 
                     <p>
                       <span style={{fontWeight:'bold', display:'block'}}>Hello, it looks like you are new here!</span>
-                      <span>Confirm your name and email are correct and choose a username...</span>
+                      <span>Create a profile to continue...</span>
                     </p>
 
                     <div className="auth0-lock-input-block">
                       <div className="auth0-lock-input-wrap auth0-lock-input-wrap-with-icon">
-                        <span><i style={{position:'absolute'}}>i</i></span>
+                        <span><i style={{position:'absolute', left: 13, top:12, color: '#999'}} className="fa fa-id-card" /></span>
                         <input type="text" name="name" className="auth0-lock-input" placeholder="Your Name" value={user.name} onChange={onChange} />
                       </div>
                     </div>
 
                     <div className="auth0-lock-input-block">
                       <div className="auth0-lock-input-wrap auth0-lock-input-wrap-with-icon">
-                        <span><i style={{position:'absolute'}}>i</i></span>
+                        <span><i style={{position:'absolute', left: 13, top:12, color: '#999'}} className="fa fa-envelope" /></span>
                         <input type="email" name="email" className="auth0-lock-input" placeholder="yours@example.com" autoCapitalize="off" value={user.email} onChange={onChange} />
                       </div>
                     </div>
 
                     <div className="auth0-lock-input-block">
                       <div className="auth0-lock-input-wrap auth0-lock-input-wrap-with-icon">
-                        <span><i style={{position:'absolute'}}>i</i></span>
+                        <span><i style={{position:'absolute', left: 13, top:12, color: '#999'}} className="fa fa-at" /></span>
                         <input type="text" name="username" className="auth0-lock-input" placeholder="username" value={user.username} onChange={onChange} />
                       </div>
                     </div>

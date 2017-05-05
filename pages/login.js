@@ -28,7 +28,7 @@ class LoginPage extends React.Component {
       this.props.apolloClient.query({
         query: userQuery,
         variables: {
-          auth0UserId: profile.user_id + 'no'
+          auth0UserId: profile.user_id
         }
       }).then((query)=>{
         if(query.data && query.data.User){

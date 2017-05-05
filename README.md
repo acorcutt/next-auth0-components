@@ -1,15 +1,12 @@
 # Next Auth0 Components
 
-__Work in Progress__
-
 Components for quickly adding Auth0 support to a Next.js app.
 
 ## TODO
-- Account creation callback
-- Fix redirect
 - Logout page
 - Authentication helpers
 - Multiple account connecting
+- Custom profile form
 
 ## Usage
 
@@ -23,11 +20,36 @@ Create a `pages/login.js` page and render the `<Login auth0Id={process.env.AUTH0
 
 ### Intercept authentication to verify or create a user in your database.
 
-Provide a `onAuthenticated()` function to intercept the authentication response to create a user in your database, set `localStorage` or redirect if required.
+Provide an `onAuthenticated( authResult, profile, callback )` function to intercept the authentication response and verify email, create a user in your database etc.
 
-### Intercept authentication and create a user profile
+```
+onAuthenticated = ( authResult, profile, callback ) => {
+  if(ok){
+    // set local storage etc and redirect...
+    Router.push('/');
+  } else {
+    //
+    if(error){
+      callback(null, error);
+    } else {
+      // initalize create step with a user
+      callback({name: profile.name});
+    }
+  }
+}
+```
 
-TODO
+### Add onCreate to create a user
+
+```
+onCreate = ( user, authResult, callback ){
+  // create in db or error from profile info
+  createUserMutation(user).then(()=>{
+    Router.push('/');    
+  }).catch(error => callback( error );)
+}
+```
+
 
 ### Using Lock Overlay
 
