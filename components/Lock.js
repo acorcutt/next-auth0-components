@@ -30,6 +30,10 @@ class Lock extends React.Component {
     ])    
   }
 
+  routerChange = (url) =>{
+    this.lock && this.lock.hide();
+  }
+
   componentDidMount () {
     const { options, auth0Id, auth0Domain } = this.props;
 
@@ -44,14 +48,16 @@ class Lock extends React.Component {
       this.props.onError && this.props.onError(...args);
     });
 
-    Router.onRouteChangeStart = () => {
-      this.lock && this.lock.hide();
-    };
+    // Listen for route changes
+    Router.router.events.on('routeChangeStart', this.routerChange);
 
     this.setState({ isMounted: true });
   }
 
   componentWillUnmount () {
+    // Stop listening
+    Router.router.events.off('routeChangeStart', this.routerChange);
+    
     this.lock && this.lock.hide();
     this.setState({ isMounted: false });
   }

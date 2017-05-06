@@ -41,6 +41,20 @@ class Login extends React.Component {
     onCreate: PropTypes.func, // function to create a new user
   }
 
+  routerChange = (url) =>{
+    this.setState({ action: Router.query.action || 'login' });        
+  }
+
+  componentDidMount(){
+    // Listen for route changes
+    Router.router.events.on('routeChangeComplete', this.routerChange);
+  }
+
+  componentWillUnmount(){
+    // Stop listening
+    Router.router.events.off('routeChangeComplete', this.routerChange);
+  }
+
   // We need to wait for a lock to be available before we do anything
   onLock = (component) => {
     
@@ -53,11 +67,6 @@ class Login extends React.Component {
       // Something went wrong
       this.setState({ action: 'error' });  
     }
-
-    // Listen for route changes
-    Router.onRouteChangeStart = (url) => { // onRouteChangeComplete
-      component && component.lock && this.setState({ action: Router.query.action || 'login' });        
-    };
   }
 
   // We should always get a componentDidUpdate as the lock will trigger a state change when its ready.
