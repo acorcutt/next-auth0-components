@@ -20,6 +20,7 @@ export default () => {
     <h1 className="f1">Next Auth0 Components</h1>
 
     <Lock options={options} auth0Id={process.env.AUTH0_ID} auth0Domain={process.env.AUTH0_DOMAIN} layout={({lock})=>(<button onClick={()=>{lock.show()}}>Overlay Login</button>)}><Link href="/login"><a>Static Login Link</a></Link></Lock>
-  
+    
+    <Link href="/logout"><a>Logout</a></Link>  
   </Root>;
 };

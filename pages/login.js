@@ -34,9 +34,9 @@ class LoginPage extends React.Component {
         if(query.data && query.data.User){
           // We have a user, just save the auth token and redirect
           try{
-            window.localStorage.setItem("auth0AccessToken", authResult.accessToken);          
+            window.localStorage.setItem('auth0AccessToken', authResult.accessToken);          
             window.localStorage.setItem('auth0IdToken', authResult.idToken);
-            window.localStorage.setItem("auth0Profile", JSON.stringify(profile));
+            window.localStorage.setItem('auth0Profile', JSON.stringify(profile));
             
             // Redirect
             Router.push('/');
