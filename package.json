@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/acorcutt/next-auth0-components#readme",
   "dependencies": {
-    "auth0-lock": "^10.14.0",
+    "auth0-lock": "^11.26.3",
     "lodash": "^4.17.4"
   },
   "peerDependencies": {
